@@ -6,7 +6,7 @@
 #    By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/04 14:21:18 by schuah            #+#    #+#              #
-#    Updated: 2022/09/04 15:31:20 by schuah           ###   ########.fr        #
+#    Updated: 2022/09/04 21:41:02 by schuah           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,27 +17,23 @@ def recurs(number, dictionary, count):
 	for key in dictionary:
 		if previous < key and number >= key:
 			previous = key
-	if (number == 0):
-		if (count == 0):
+	if previous == 0:
+		if count == 0:
 			print(dictionary[previous], end=" ")
 		return
-	elif number >= 0 and number <= 9:
+	elif previous > 0 and previous <= 9:
 		print(dictionary[previous], end=" ")
 	else:
+		n1, n2 = divmod(number, previous)
+		if number / previous > 1 or previous >= 100:
+			recurs(n1, dictionary, count + 1)
 		print(dictionary[previous], end=" ")
-		recurs(number % previous, dictionary, count + 1)
-	# for key in dictionary:
-	# 	if number == key:
-	# 		print(dictionary[key])
-	# 		return
-	# if key > number:
-	# 	recurs(number % previous, dictionary, count + 1)
-	# 	recurs(number / previous, dictionary, count + 1)
+		recurs(n2, dictionary, count + 1)
 
 def	main():
 	dictionary = {}
 	try:
-		f = open("dicts/numbers.dict", "r")
+		f = open(input("Dictionary: "), "r")
 	except IOError:
 		print("Dict Error")
 		return
@@ -47,7 +43,11 @@ def	main():
 		dictionary[int(split_str[0])] = remove_suffix(split_str[1], "\n")
 		str = f.readline()
 	f.close()
-	# print(dictionary)
-	recurs(int(input("Number: ")), dictionary, 0)
+	inputNumber = input("Number: ")
+	if (inputNumber == ""):
+		print("Input Error")
+		return
+	recurs(int(inputNumber), dictionary, 0)
+	print()
 
 main()
