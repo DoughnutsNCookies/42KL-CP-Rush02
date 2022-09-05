@@ -6,7 +6,7 @@
 #    By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/04 14:21:18 by schuah            #+#    #+#              #
-#    Updated: 2022/09/05 16:32:20 by schuah           ###   ########.fr        #
+#    Updated: 2022/09/05 16:37:46 by schuah           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ def recurs(number, dictionary, count):
 		print(dictionary[previous], end=" ")
 	else:
 		n1, n2 = divmod(number, previous)
-		if n1 > 1 or previous >= 100:
+		if previous >= 100:
 			recurs(n1, dictionary, count + 1)
 		print(dictionary[previous], end=" ")
 		recurs(n2, dictionary, count + 1)
